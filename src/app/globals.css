@@ -1,0 +1,213 @@
+@import "tailwindcss";
+
+/* ─── CSS Custom Properties ─────────────────────────────────────────────────── */
+:root {
+  --color-bg: #0A0A0E;
+  --color-surface: #101016;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-primary: #FF6B35;
+  --color-text-primary: #F0F0F5;
+  --color-text-muted: #7A7A90;
+}
+
+/* ─── Base Reset ─────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; height: 100%; }
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  background-color: var(--color-bg) !important;
+  color: var(--color-text-primary);
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ─── App Shell Layout ───────────────────────────────────────────────────────── */
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background: var(--color-bg);
+}
+
+/* Content body: sidebar + main */
+.app-body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+/* Main scrollable area */
+.main-scroll {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--color-bg);
+}
+
+.content-wrapper {
+  padding: 16px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-bottom: 90px;
+}
+
+/* ─── Mobile top bar ─────────────────────────────────────────────────────────── */
+.mobile-top-bar {
+  display: none;
+}
+
+/* ─── Mobile bottom nav ──────────────────────────────────────────────────────── */
+.mobile-bottom-nav {
+  display: none;
+}
+
+/* ─── Sidebar ────────────────────────────────────────────────────────────────── */
+.sidebar-nav {
+  display: none !important;
+}
+
+/* ─── Desktop page header ────────────────────────────────────────────────────── */
+.desktop-page-header {
+  display: none;
+  margin-bottom: 24px;
+}
+
+.page-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 4px;
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+/* ─── Desktop breakpoint (≥ 768px) ─────────────────────────────────────────── */
+@media (min-width: 768px) {
+  .app-shell {
+    flex-direction: column;
+  }
+
+  .mobile-top-bar,
+  .mobile-bottom-nav {
+    display: none !important;
+  }
+
+  .sidebar-nav {
+    display: flex !important;
+  }
+
+  .desktop-page-header {
+    display: block;
+  }
+
+  .content-wrapper {
+    padding: 32px 36px;
+    padding-bottom: 32px;
+  }
+}
+
+/* ─── Mobile breakpoint (< 768px) ───────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .mobile-top-bar {
+    display: flex !important;
+  }
+
+  .mobile-bottom-nav {
+    display: flex !important;
+  }
+
+  .courses-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ─── Custom Grids ───────────────────────────────────────────────────────────── */
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+/* ─── Custom Scrollbar ───────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255, 107, 53, 0.15); border-radius: 99px; }
+
+/* ─── Bento Card Base (Simple and Clean) ──────────────────────────────────────── */
+.bento-card {
+  background: var(--color-surface) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 12px !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.bento-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 107, 53, 0.3);
+  box-shadow: 0 0 12px rgba(255, 107, 53, 0.1);
+  opacity: 0;
+  transition: opacity 0.22s ease;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.bento-card:hover::after {
+  opacity: 1;
+}
+
+/* ─── Progress Bar ───────────────────────────────────────────────────────────── */
+.progress-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 99px;
+  overflow: hidden;
+  height: 6px;
+  width: 100%;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: #FF6B35;
+}
+
+/* ─── Heatmap Cell ───────────────────────────────────────────────────────────── */
+.heatmap-cell {
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* ─── Skeleton Shimmer ───────────────────────────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(90deg, #121217 25%, #181822 50%, #121217 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.6s ease-in-out infinite;
+  border-radius: 6px;
+}
+
+@keyframes skeleton-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
