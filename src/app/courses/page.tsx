@@ -3,6 +3,7 @@ import CoursesClient from '@/components/CoursesClient';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = { title: 'Courses' };
+export const dynamic = 'force-dynamic';
 
 const FALLBACK_COURSES: Course[] = [
   { id: '1', title: 'Advanced React Patterns',       progress: 75, icon_name: 'Code2',    created_at: '' },
